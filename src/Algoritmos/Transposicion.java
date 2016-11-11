@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
  *
  * @author Josh <github:Josh2604>
  */
-    /***********************************************************
-     *              Algoritmo de cifrado por transposicion     *
-     *                by(github.com/Josh2604)                  *
-     *                                                         *
-     ***********************************************************/
+/**
+ * *********************************************************
+ * Algoritmo de cifrado por transposicion * by(github.com/Josh2604) * *
+ * *********************************************************
+ */
 public class Transposicion extends javax.swing.JFrame {
 
     private static int TAM = 0;
@@ -23,8 +23,8 @@ public class Transposicion extends javax.swing.JFrame {
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '+', '/', '.', ',', '?', '|','\'','"','?',';',
-        ':','<','>','{','}','[',']','_',' '};
+        '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '+', '/', '.', ',', '?', '|', '\'', '"', '?', ';',
+        ':', '<', '>', '{', '}', '[', ']', '_', ' '};
 
     /**
      * Creates new form Transposicion
@@ -198,7 +198,7 @@ public class Transposicion extends javax.swing.JFrame {
      * Metodo donde se cifra el texto introducido por el usuario.
      */
     private void cifrado(char matrix[][], int llave[]) {
-        String messagge="";
+        String messagge = "";
         int temporal;
         int cont = 0, cont2 = 0;
         char matrix2[][] = new char[matrix.length][matrix.length];
@@ -223,7 +223,7 @@ public class Transposicion extends javax.swing.JFrame {
             for (int j = 0; j < matrix2.length; j++) {
                 temporal = llave[cont];
                 textAreaCifrado.append("" + matrix[cont2][temporal]);
-                messagge=messagge+""+matrix[cont2][temporal];
+                messagge = messagge + "" + matrix[cont2][temporal];
                 cont2++;
             }
             cont2 = 0;
@@ -238,6 +238,8 @@ public class Transposicion extends javax.swing.JFrame {
      * de haber pedido la llave y compararla con la ingresada anteriormente.
      */
     private void decifrar(String Mensaje, String Llave) {
+        String messLabel = "";
+        String mensaje = txtMensaje_cifrar.getText();
         int llave3[] = findKey(ELEMENTOS_CIFRADO, generCaracter(Llave));
         char matrix[][] = new char[Llave.length()][Llave.length()];
         boolean bandera = true;
@@ -275,7 +277,6 @@ public class Transposicion extends javax.swing.JFrame {
 //                        System.out.print("\t" + matrix[i][j]);
 //                    }
 //                }
-
                 //-----------impresion del mensaje decifrado-------------------------//
                 textAreaDecifrado.append("\n");
                 int conta = 0;
@@ -284,6 +285,7 @@ public class Transposicion extends javax.swing.JFrame {
                         if (llave3[j] == conta && i < llave3.length) {
                             if (matrix[i][j] != '%') {
                                 textAreaDecifrado.append("" + matrix[i][j]);
+                                messLabel = messLabel + "" + matrix[i][j];
                             }
                             conta++;
                         }
@@ -294,7 +296,7 @@ public class Transposicion extends javax.swing.JFrame {
                     }
 
                 }
-                textAreaDecifrado.append("\n");                
+                textAreaDecifrado.append("\n");
                 /*------------------------------------------*/
                 boolean flag = false;
                 int temporal;
@@ -321,11 +323,16 @@ public class Transposicion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Un numero de columna ingresada no corresponde con la matriz original.");
                 }
                 /*-----------------*/
+
+                if (mensaje.equals(messLabel)) {
+                    JOptionPane.showMessageDialog(btnDecifrar, "El mensaje ha sido decifrado correctamente!", "Correcto :-)", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(btnDecifrar, "El mensaje ha sido decifrado incorrectamente!", "Incorrecto", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
         }
-
     }
-
     //only develop
     private char random(char array[]) {
         int random = (int) Math.random() * 84;
@@ -349,8 +356,8 @@ public class Transposicion extends javax.swing.JFrame {
         }
 
 //        only debug
-//        printArreglo(llave);
-//        System.out.println("\n\n");
+        printArreglo(llave);
+        System.out.println("\n\n");
         return llave;
     }
 
